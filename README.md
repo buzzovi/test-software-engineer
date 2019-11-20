@@ -12,7 +12,7 @@ We want you to create a web application that will be used as an "internal blog".
 
 ![Example](https://github.com/KaizenReporting/test-software-engineer/blob/master/The%20Kaizen%20Blog.jpg?raw=true)
 
-Users don't have to be authenticated. Anyone within the organisation can access this webapp and post updates and comments. They just have to enter their name and the message they want to post. (And optionally an image for blog posts if they want to)
+Users don't have to be authenticated. Anyone within the organisation can access this webapp and post updates and comments. They just have to enter their name and the message they want to post. (And optionally an image for updates if they want to)
 
 Users can also delete comments. Again, it doesn't matter whether they posted the comment they want to delete or not, here any user is able to delete any comment, there is no concept of authentication. However, what we'll want in a situation where a comment is deleted, is to send an email to alert administrators about it.
 
@@ -20,7 +20,21 @@ Below is the full list of requirements. We recommend you to start by documenting
 
 ## Requirements
 
-
+Requirement | User Story | Importance | Acceptance Criteria | Notes
+------------ | ------------- | ------------- | ------------- | -------------
+Technical documentation | A developer/administrator wants to be able to understand how the web application is built | CRITICAL | Sufficient technical documentation available |
+Add basic update | A user wants to be able to post a basic update | CRITICAL | XXX |
+Add update with image | A user wants to be able to post an update with an image | MEDIUM | XXX |
+View updates | A user wants to be able to view all updates | CRITICAL | XXX | Sorted with the newest update first, and so that it displays the author, the date and the text
+Filter updates | A user wants to be able to filter updates that contain a specific keyword | LOW | XXX |
+Add comment | A user wants to be able to add a comment to an update | CRITICAL | XXX |
+Update comment | A user wants to be able to update an existing comment | LOW | XXX |
+View comments | A user wants to be able to view all comments on each update | CRITICAL | XXX | Sorted with the oldest comment first, and so that it displays the author, the date and the text
+Delete comment | A user wants to be able to delete an existing comment | HIGH | XXX |
+Comment deletion notification | An administrator wants to get notified when a user deletes a comment | HIGH | XXX |
+Logging | An administrator wants to be able to access logs of all actions performed by users | MEDIUM | XXX |
+Security | An administrator wants to be able to trust that the webapp has been coded securely | HIGH | AWS services permissionned following the principle of least privilege |
+Authentication | A user wants to be able to authenticate to the webapp | LOW | XXX |
 
 ## Constraints
 
