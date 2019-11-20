@@ -34,7 +34,7 @@ Delete comment | A user wants to be able to delete an existing comment | HIGH | 
 Comment deletion notification | An administrator wants to get notified when a user deletes a comment | HIGH | XXX |
 Logging | An administrator wants to be able to access logs of all actions performed by users | MEDIUM | XXX |
 Security | An administrator wants to be able to trust that the webapp has been coded securely | HIGH | AWS services permissionned following the principle of least privilege |
-Authentication | A user wants to be able to authenticate to the webapp | LOW | XXX |
+Authentication | A user wants to be able to authenticate to the webapp | V. LOW | XXX |
 
 ## Constraints
 
