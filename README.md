@@ -38,7 +38,59 @@ IP whitelisting | An administrator wants to be able to launch the stack with IP 
 Like | A user want to be able to "like" updates | LOW | Given I'm on the Kaizen Blog, When I am looking at a particular update, Then I can "like" that update. When I "like" an update, then the count of likes for that update is increased by 1 and displayed next to the update
 
 ## Constraints
+### Allowed Services
+
+* Amazon Certificate Manager (ACM)
+* API Gateway V2
+* Auto Scaling
+* Cloud9
+* CloudFormation
+* CloudFront
+* CloudWatch
+* DynamoDB
+* EC2 Container Registry (ECR)
+* EC2 Container Service (ECS)
+* Elastic Beanstalk
+* Elastic Compute Cloud (EC2)
+* Elastic Container Service for Kubernetes (EKS)
+* Elastic Load Balancing (ELB)
+* Identity and Access Management (IAM)
+* Key Management Service (KMS)
+* Relational Database Service (RDS)
+* Secrets Manager
+* Security Token Service (STS)
+* Simple Email Service (SES)
+* Simple Notification Service (SNS)
+* Simple Queue Service (SQS)
+* Simple Storage Service (S3)
+* States (Step Functions)
+* Systems Manager (SSM)
+* Web Application Firewall (WAF)
+
+### Sandbox Limits
+#### EC2
+
+* Only these Instance Types are allowed:
+  * t2.micro to t2.medium
+  * t3.micro to t3.medium
+* Max Volume Size of 50GB
+* Max Volume IOPS of 150
+* Cannot use Provisioned IOPS
+* No Elastic GPU
+
+#### IAM
+
+* Cannot modify your IAM user or any already existing role/policy
+* Cannot use or set up SSO
+
+#### RDS
+
+* Only these Instance Types are allowed:
+  * db.t2.micro to db.t2.medium
+  * db.t3.micro to db.t3.medium
+* Cannot use Provisioned IOPS
+* Max Storage size of 10GB
 
 ## Technical architecture
 
-Please replace the text in this section with a short paragraph detailing how you will be architecting the solution. Which services you are going to use, why you think that they're the most appropriate and how they are going to interact with each other. We're not looking for a fully detailed technical documentation here, but at least something that quickly enables us (and other developers) to understand what you've done and how.
+Please replace the text in this section by a short paragraph detailing how you will be architecting the solution. Which services you are going to use, why you think that they're the most appropriate and how they are going to interact with each other. We're not looking for a fully detailed technical documentation here, but at least something that quickly enables us (and other developers) to understand what you've done and how.
