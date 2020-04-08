@@ -1,0 +1,13 @@
+{
+  "body": "{\"message\": \"hello world\"}",
+  "httpMethod": "POST",
+  "isBase64Encoded": false,
+  "queryStringParameters": {
+    "user_name": "BZ",
+    "timestamp": "123455679",
+    "post_content": "First Post"
+  },
+  "stageVariables": {
+    "baz": "qux"
+  }
+}

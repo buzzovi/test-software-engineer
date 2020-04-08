@@ -8,7 +8,7 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 30
 
 Resources:
   HelloWorldFunction:
@@ -26,7 +26,7 @@ Resources:
   PostListFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: post_list/
+      CodeUri: post/
       Handler: app.post_list
       Runtime: python3.8
       Events:
@@ -35,6 +35,77 @@ Resources:
           Properties:
             Path: /postlist
             Method: get
+  PostCreateFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: post/
+      Handler: app.post_create
+      Runtime: python3.8
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /postcreate
+            Method: post
+  PostDeleteFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: post/
+      Handler: app.post_delete
+      Runtime: python3.8
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /postdelete
+            Method: post
+  CommentCreateFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: post/
+      Handler: app.comment_create
+      Runtime: python3.8
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /commentcreate
+            Method: post
+  CommentDeleteFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: post/
+      Handler: app.comment_delete
+      Runtime: python3.8
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /commentdelete
+            Method: post
+  DynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      TableName: Blog
+      AttributeDefinitions: 
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: content
+          AttributeType: S
+        - AttributeName: username
+          AttributeType: S
+        - AttributeName: image
+          AttributeType: S
+        - AttributeName: timestamp
+          AttributeType: N
+      KeySchema: 
+        - AttributeName: id
+          KeyType: HASH
+      ProvisionedThroughput: 
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      StreamSpecification:
+        StreamViewType: NEW_IMAGE
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
