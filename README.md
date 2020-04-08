@@ -98,4 +98,15 @@ Like | A user want to be able to "like" updates | LOW | Given I'm on the Kaizen 
 
 ## Technical architecture
 
+Blog
+
+* Backend: 
+  * DynamoDB 
+   * Blog Table
+  * Lamda Python functions
+
+* Frontend 
+  * React
+
+
 Please replace the text in this section by a short paragraph detailing how you will be architecting the solution. Which services you are going to use, why you think that they're the most appropriate and how they are going to interact with each other. We're not looking for a fully detailed technical documentation here, but at least something that quickly enables us (and other developers) to understand what you've done and how.
