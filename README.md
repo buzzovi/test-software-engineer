@@ -1,3 +1,9 @@
+IAM Username: kaizen_user
+
+IAM Password: LV0yU7doaTcraOK[9
+
+Login URL: https://608738265803.signin.aws.amazon.com/console
+
 # The Kaizen blog
 
 Hi there! And welcome to the technical test stage of the interview process for becoming a Kaizen Software Engineer!
@@ -10,7 +16,7 @@ So let's jump straight in!
 
 We want you to create a web application that will be used as an "internal blog". The objective is to let Kaizen employees share updates and add comments to those updates through a single-page web UI, as shown below:
 
-![Example](https://github.com/KaizenReporting/test-software-engineer/blob/master/The%20Kaizen%20Blog.jpg?raw=true)
+![Example](https://github.com/JamieMcKernanKaizen/test-software-engineer/blob/master/The%20Kaizen%20Blog.jpg?raw=true)
 
 Users don't have to be authenticated. Anyone within the organisation can access this webapp and post updates and comments. They just have to enter their name and the message they want to post. (And optionally an image for updates if they want to)
 
