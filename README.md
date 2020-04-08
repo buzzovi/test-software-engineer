@@ -103,10 +103,32 @@ Blog
 * Backend: 
   * DynamoDB 
    * Blog Table
-  * Lamda Python functions
+
+  * Lamda Python functions - Read data from dynamo forward to react API Gateway
+   * postlist
+   * postcreate
+   * comment
 
 * Frontend 
   * React
 
+DynamoDB Blog Table item structure
+"Items": [
+  {
+    "post-id": "1586341039-bz",
+    "content": "First Post",
+    "username": "bz",
+    "image": "''",
+    "timestamp": 1586341039,
+    "comments": [
+      {
+      "comment": "Great!",
+      "liked": false,
+      "timestamp": 1586341039,
+      "username": "Julia"
+      }
+    ]
+  }
+],
 
 Please replace the text in this section by a short paragraph detailing how you will be architecting the solution. Which services you are going to use, why you think that they're the most appropriate and how they are going to interact with each other. We're not looking for a fully detailed technical documentation here, but at least something that quickly enables us (and other developers) to understand what you've done and how.

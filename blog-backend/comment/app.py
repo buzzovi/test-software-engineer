@@ -56,7 +56,7 @@ class DecimalEncoder(json.JSONEncoder):
                 return int(o)
         return super(DecimalEncoder, self).default(o)
 
-def post_list(event, context):
+def comment(event, context):
     """Sample pure Lambda function
 
     Parameters
@@ -78,13 +78,6 @@ def post_list(event, context):
         Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
     """
 
-    # try:
-    #     ip = requests.get("http://checkip.amazonaws.com/")
-    # except requests.RequestException as e:
-    #     # Send some context about this error to Lambda Logs
-    #     print(e)
-
-    #     raise e
 
     dynamodb = boto3.resource('dynamodb', region_name='eu-west-1', endpoint_url="http://localhost:8000")
 
@@ -93,27 +86,7 @@ def post_list(event, context):
     response = table.query(
         # KeyConditionExpression=Key('year').eq(1985)
     )
-    # title = "The Big New Movie"
-    # year = 2015
-
-    # response = table.update_item(
-    #     Key={
-    #         'year': year,
-    #         'title': title
-    #     },
-    #     UpdateExpression="set info.rating = :r, info.plot=:p, info.actors=:a",
-    #     ExpressionAttributeValues={
-    #         ':r': decimal.Decimal(5.5),
-    #         ':p': "Everything happens all at once.",
-    #         ':a': ["Larry", "Moe", "Curly"]
-    #     },
-    #     ReturnValues="UPDATED_NEW"
-    # )
-
-    # print("UpdateItem succeeded:")
-    # print(json.dumps(response, indent=4, cls=DecimalEncoder))
-
-
+    
 
 
     return {
