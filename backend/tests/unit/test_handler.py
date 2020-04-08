@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from hello_world import app
+from backend.hello_world import app
 
 
 @pytest.fixture()
@@ -63,6 +63,35 @@ def apigw_event():
 
 
 def test_lambda_handler(apigw_event, mocker):
+
+    ret = app.lambda_handler(apigw_event, "")
+    data = json.loads(ret["body"])
+
+    assert ret["statusCode"] == 200
+    assert "message" in ret["body"]
+    assert data["message"] == "hello world"
+    # assert "location" in data.dict_keys()
+
+
+@pytest.fixture()
+def post_create():
+    """ Generates API GW Event"""
+
+    return {
+        "body": "{\"message\": \"hello world\"}",
+        "httpMethod": "POST",
+        "isBase64Encoded": False,
+        "queryStringParameters": {
+            "user_name": "BZ",
+            "timestamp": "123455679",
+            "post_content": "First Post"
+        },
+        "stageVariables": {
+            "baz": "qux"
+        }
+    }
+
+def test_lambda_post_create(post_create, mocker):
 
     ret = app.lambda_handler(apigw_event, "")
     data = json.loads(ret["body"])
