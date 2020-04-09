@@ -59,6 +59,7 @@
 .postlist{
   width: 400px;
   margin: auto;
+  margin-bottom: 50px;
 }
 .post{
   margin: 10px auto;
@@ -82,6 +83,7 @@
 }
 .commenlist{
   padding-left: 10%;
+  margin-bottom: 30px;
 }
 .Comment_form{
   display: flex;

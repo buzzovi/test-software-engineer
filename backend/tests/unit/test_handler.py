@@ -78,18 +78,7 @@ def test_lambda_handler(apigw_event):
 def post_create_event():
     """ Generates API GW Event"""
 
-    return {
-        "httpMethod": "POST",
-        "isBase64Encoded": False,
-        "queryStringParameters": {
-            "user_name": "BZ",
-            "timestamp": "123455679",
-            "post_content": "First Post"
-        },
-        "stageVariables": {
-            "baz": "qux"
-        }
-    }
+    return {'resource': '/postcreate', 'path': '/postcreate', 'httpMethod': 'POST', 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'Accept-Language': 'en,en-US;q=0.9,hu;q=0.8', 'CloudFront-Forwarded-Proto': 'https', 'CloudFront-Is-Desktop-Viewer': 'true', 'CloudFront-Is-Mobile-Viewer': 'false', 'CloudFront-Is-SmartTV-Viewer': 'false', 'CloudFront-Is-Tablet-Viewer': 'false', 'CloudFront-Viewer-Country': 'GB', 'content-type': 'text/plain;charset=UTF-8', 'Host': 'bmpi7pfcqk.execute-api.eu-west-1.amazonaws.com', 'origin': 'http://localhost:3000', 'Referer': 'http://localhost:3000/', 'sec-fetch-dest': 'empty', 'sec-fetch-mode': 'cors', 'sec-fetch-site': 'cross-site', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', 'Via': '2.0 8759b407cd243e2e2c573d5db804d721.cloudfront.net (CloudFront)', 'X-Amz-Cf-Id': 'kuqLbzEHh1GkRuINUnxDGryOdFCmY6hnjCQ9GIWls1a0B0xfEaZMEw==', 'X-Amzn-Trace-Id': 'Root=1-5e8f59dd-596d37aaf8075b4e22b0c67c', 'X-Forwarded-For': '86.161.235.22, 70.132.46.140', 'X-Forwarded-Port': '443', 'X-Forwarded-Proto': 'https'}, 'multiValueHeaders': {'Accept': ['*/*'], 'Accept-Encoding': ['gzip, deflate, br'], 'Accept-Language': ['en,en-US;q=0.9,hu;q=0.8'], 'CloudFront-Forwarded-Proto': ['https'], 'CloudFront-Is-Desktop-Viewer': ['true'], 'CloudFront-Is-Mobile-Viewer': ['false'], 'CloudFront-Is-SmartTV-Viewer': ['false'], 'CloudFront-Is-Tablet-Viewer': ['false'], 'CloudFront-Viewer-Country': ['GB'], 'content-type': ['text/plain;charset=UTF-8'], 'Host': ['bmpi7pfcqk.execute-api.eu-west-1.amazonaws.com'], 'origin': ['http://localhost:3000'], 'Referer': ['http://localhost:3000/'], 'sec-fetch-dest': ['empty'], 'sec-fetch-mode': ['cors'], 'sec-fetch-site': ['cross-site'], 'User-Agent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36'], 'Via': ['2.0 8759b407cd243e2e2c573d5db804d721.cloudfront.net (CloudFront)'], 'X-Amz-Cf-Id': ['kuqLbzEHh1GkRuINUnxDGryOdFCmY6hnjCQ9GIWls1a0B0xfEaZMEw=='], 'X-Amzn-Trace-Id': ['Root=1-5e8f59dd-596d37aaf8075b4e22b0c67c'], 'X-Forwarded-For': ['86.161.235.22, 70.132.46.140'], 'X-Forwarded-Port': ['443'], 'X-Forwarded-Proto': ['https']}, 'queryStringParameters': None, 'multiValueQueryStringParameters': None, 'pathParameters': None, 'stageVariables': None, 'requestContext': {'resourceId': 'quxt3o', 'resourcePath': '/postcreate', 'httpMethod': 'POST', 'extendedRequestId': 'Kur6nE8rDoEFv1Q=', 'requestTime': '09/Apr/2020:17:22:37 +0000', 'path': '/Prod/postcreate', 'accountId': '531958541780', 'protocol': 'HTTP/1.1', 'stage': 'Prod', 'domainPrefix': 'bmpi7pfcqk', 'requestTimeEpoch': 1586452957429, 'requestId': '04c99c6a-75cf-4a0f-be93-410c7b4175e6', 'identity': {'cognitoIdentityPoolId': None, 'accountId': None, 'cognitoIdentityId': None, 'caller': None, 'sourceIp': '86.161.235.22', 'principalOrgId': None, 'accessKey': None, 'cognitoAuthenticationType': None, 'cognitoAuthenticationProvider': None, 'userArn': None, 'userAgent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36', 'user': None}, 'domainName': 'bmpi7pfcqk.execute-api.eu-west-1.amazonaws.com', 'apiId': 'bmpi7pfcqk'}, 'body': '{"username":"cc","content":"ccc"}', 'isBase64Encoded': False}
 
 def test_lambda_post_create(post_create_event):
 

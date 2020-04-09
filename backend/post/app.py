@@ -23,6 +23,15 @@ class DecimalEncoder(json.JSONEncoder):
                 return int(o)
         return super(DecimalEncoder, self).default(o)
 
+def prepare_event(event):
+    params = {}
+    if event.get('queryStringParameters'):
+        params = {**event.get('queryStringParameters'), **params}
+    if event.get('body'):
+        body = json.loads(event.get('body'))
+        params = {**body, **params}
+    return params
+
 def post_list(event, context):
     """ List Post
     """
@@ -36,16 +45,21 @@ def post_list(event, context):
 
     return {
         "statusCode": 200,
+        'headers': {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
         "body": json.dumps(response, indent=4, cls=DecimalEncoder),
     }
 
 def post_create(event, context):
-
-    user_name = event['queryStringParameters']['user_name']
-    post_content = event['queryStringParameters']['post_content']
+    event = prepare_event(event)
+    user_name = event['username']
+    post_content = event['content']
     image = "null"
-    if event['queryStringParameters'].get('image'):
-        image = event['queryStringParameters']['image']
+    if event.get('image'):
+        image = event['image']
     now_timestamp = utcnow()
 
 
@@ -71,11 +85,17 @@ def post_create(event, context):
 
     return {
         "statusCode": 200,
+        'headers': {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
         "body": json.dumps(item, indent=4, cls=DecimalEncoder),
     }
 
 def post_delete(event, context):
-    post_id = event['queryStringParameters']['id']
+    event = prepare_event(event)
+    post_id = event['id']
 
 
     dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
@@ -87,13 +107,19 @@ def post_delete(event, context):
     )
     return {
         "statusCode": 200,
-        "body": json.dumps(f"'Deleted id': '{post_id}'", indent=4, cls=DecimalEncoder),
+        'headers': {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
+        "body": json.dumps({'id': post_id }, indent=4, cls=DecimalEncoder),
     }
 
 def comment_create(event, context):
-    post_id = event['queryStringParameters']['id']
-    user_name = event['queryStringParameters']['user_name']
-    comment = event['queryStringParameters']['comment']
+    event = prepare_event(event)
+    post_id = event['postid']
+    user_name = event['username']
+    comment = event['comment']
     now_timestamp = utcnow()
 
     comment_item = dict()
@@ -126,13 +152,19 @@ def comment_create(event, context):
 
     return {
         "statusCode": 200,
-        "body": json.dumps(response, indent=4, cls=DecimalEncoder),
+        'headers': {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
+        "body": json.dumps(item, indent=4, cls=DecimalEncoder),
     }
 
 def comment_delete(event, context):
-    post_id = event['queryStringParameters']['id']
-    user_name = event['queryStringParameters']['user_name']
-    timestamp = event['queryStringParameters']['timestamp']
+    event = prepare_event(event)
+    post_id = event['id']
+    user_name = event['username']
+    timestamp = event['timestamp']
 
     dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
     table = dynamodb.Table('Blog')
@@ -158,5 +190,10 @@ def comment_delete(event, context):
 
     return {
         "statusCode": 200,
+        'headers': {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
         "body": json.dumps(item, indent=4, cls=DecimalEncoder),
     }
