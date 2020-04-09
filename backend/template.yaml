@@ -9,6 +9,8 @@ Description: >
 Globals:
   Function:
     Timeout: 30
+  Api:
+    Cors: "'*'"
 
 Resources:
   HelloWorldFunction:
@@ -35,6 +37,9 @@ Resources:
           Properties:
             Path: /postlist
             Method: get
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
   PostCreateFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -47,6 +52,9 @@ Resources:
           Properties:
             Path: /postcreate
             Method: post
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
   PostDeleteFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -59,6 +67,9 @@ Resources:
           Properties:
             Path: /postdelete
             Method: post
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
   CommentCreateFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -71,6 +82,9 @@ Resources:
           Properties:
             Path: /commentcreate
             Method: post
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
   CommentDeleteFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -83,6 +97,9 @@ Resources:
           Properties:
             Path: /commentdelete
             Method: post
+      Policies:
+        # Give DynamoDB Full Access to your Lambda Function
+        - AmazonDynamoDBFullAccess
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties: 

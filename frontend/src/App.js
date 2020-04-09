@@ -103,6 +103,7 @@ function PostList(props){
 function App() {
   const { handleSubmit, register, errors } = useForm();
   const [ img, setImg ] = useState({files: []})
+  const [ allPost, setAllPosts ] = useState({Items: []})
 
   const onFileUpload = imgs =>{
     setImg({ files: [imgs] })
@@ -111,13 +112,30 @@ function App() {
     if (img.files.length>0)
       values.images = img.files[0].base64;
     console.log(values);
+    
   };
 
-
+  function getPostsList() {
+    fetch("https://bmpi7pfcqk.execute-api.eu-west-1.amazonaws.com/Prod/postlist")
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setAllPosts(result.items);
+          },
+          // Note: it's important to handle errors here
+          // instead of a catch() block so that we don't swallow
+          // exceptions from actual bugs in components.
+          (error) => {
+            console.log("Error")
+          }
+        )
+  }
+  getPostsList()
+  
   return (
     <div className="App">
       <PostCreate onSubmit={onSubmit} handleSubmit={handleSubmit} register={register} errors={errors} onFileUpload={onFileUpload} imgSrc={img} />
-      <PostList posts={allpost}  />
+      <PostList posts={allPost}  />
     </div>
   );
 }
