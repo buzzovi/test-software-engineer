@@ -75,7 +75,7 @@ def post_create(event, context):
     }
 
 def post_delete(event, context):
-    post_id = event['id']
+    post_id = event['queryStringParameters']['id']
 
 
     dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
@@ -87,14 +87,14 @@ def post_delete(event, context):
     )
     return {
         "statusCode": 200,
-        "body": json.dumps(f"Deleted id: {post_id}", indent=4, cls=DecimalEncoder),
+        "body": json.dumps(f"'Deleted id': '{post_id}'", indent=4, cls=DecimalEncoder),
     }
 
 def comment_create(event, context):
-    post_id = event['id']
-    user_name = event['user_name']
-    comment = event['user_name']
-    now_timestamp = datetime.datetime.now()
+    post_id = event['queryStringParameters']['id']
+    user_name = event['queryStringParameters']['user_name']
+    comment = event['queryStringParameters']['comment']
+    now_timestamp = utcnow()
 
     comment_item = dict()
     comment_item["comment"] = comment
@@ -107,7 +107,7 @@ def comment_create(event, context):
     table = dynamodb.Table('Blog')
     response = table.get_item(
         Key={
-            'id': f"{now_timestamp}-{user_name}"
+            'id': post_id
         }
     )
     item = response['Item']
@@ -116,7 +116,7 @@ def comment_create(event, context):
 
     table.update_item(
         Key={
-            'id': f"{now_timestamp}-{user_name}"
+            'id': post_id
         },
         UpdateExpression='SET comments = :val1',
         ExpressionAttributeValues={
@@ -130,8 +130,33 @@ def comment_create(event, context):
     }
 
 def comment_delete(event, context):
-    response = dict()
+    post_id = event['queryStringParameters']['id']
+    user_name = event['queryStringParameters']['user_name']
+    timestamp = event['queryStringParameters']['timestamp']
+
+    dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
+    table = dynamodb.Table('Blog')
+    response = table.get_item(
+        Key={
+            'id': post_id
+        }
+    )
+    item = response['Item']
+
+    an_iterator = filter(lambda comment: comment['timestamp'] != Decimal(timestamp) or comment['username']!=user_name, item['comments'])
+    item['comments'] = list(an_iterator)
+
+    table.update_item(
+        Key={
+            'id': post_id
+        },
+        UpdateExpression='SET comments = :val1',
+        ExpressionAttributeValues={
+            ':val1': item['comments']
+        }
+    )
+
     return {
         "statusCode": 200,
-        "body": json.dumps(response, indent=4, cls=DecimalEncoder),
+        "body": json.dumps(item, indent=4, cls=DecimalEncoder),
     }

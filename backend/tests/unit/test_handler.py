@@ -99,4 +99,76 @@ def test_lambda_post_create(post_create_event):
     assert ret["statusCode"] == 200
     assert "content" in ret["body"]
     assert data["content"] == "First Post"
-    # assert "location" in data.dict_keys()
+
+@pytest.fixture()
+def post_delete_event():
+    """ Generates API GW Event"""
+
+    return {
+        "httpMethod": "POST",
+        "isBase64Encoded": False,
+        "queryStringParameters": {
+            "id": "1586388479.53417110443115234375-BZ"
+        },
+        "stageVariables": {
+            "baz": "qux"
+        }
+    }
+
+def test_lambda_post_delete(post_delete_event):
+
+    ret = blog.post_delete(post_delete_event, "")
+    data = json.loads(ret["body"])
+
+    assert ret["statusCode"] == 200
+    assert "Deleted id" in ret["body"]
+
+@pytest.fixture()
+def comment_create_event():
+    """ Generates API GW Event"""
+
+    return {
+        "httpMethod": "POST",
+        "isBase64Encoded": False,
+        "queryStringParameters": {
+            "id": "1586388562.792418956756591796875-BZ",
+            "user_name": "B",
+            "comment": "Comment!!!2"
+        },
+        "stageVariables": {
+            "baz": "qux"
+        }
+    }
+
+def test_lambda_comment_create(comment_create_event):
+
+    ret = blog.comment_create(comment_create_event, "")
+    data = json.loads(ret["body"])
+
+    assert ret["statusCode"] == 200
+    assert "comment" in ret["body"]
+
+@pytest.fixture()
+def comment_delete_event():
+    """ Generates API GW Event"""
+
+    return {
+        "httpMethod": "POST",
+        "isBase64Encoded": False,
+        "queryStringParameters": {
+            "id": "1586388562.792418956756591796875-BZ",
+            "user_name": "B",
+            "timestamp": "1586392147.67799091339111328125"
+        },
+        "stageVariables": {
+            "baz": "qux"
+        }
+    }
+
+def test_lambda_comment_delete(comment_delete_event):
+
+    ret = blog.comment_delete(comment_delete_event, "")
+    data = json.loads(ret["body"])
+
+    assert ret["statusCode"] == 200
+    assert "comments" in ret["body"]
