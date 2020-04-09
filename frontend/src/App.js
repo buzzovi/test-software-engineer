@@ -3,6 +3,29 @@ import './App.css';
 import { useForm } from "react-hook-form";
 import FileBase64 from 'react-file-base64';
 
+function timeConverter(UNIX_timestamp){
+  // let unix_timestamp = 1549312452
+  let unix_timestamp = UNIX_timestamp
+  // Create a new JavaScript Date object based on the timestamp
+  // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+  var date = new Date(unix_timestamp * 1000);
+  var years = date.getFullYear();
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var month = months[date.getMonth()];
+  var day = date.getDate();
+  // Hours part from the timestamp
+  var hours = date.getHours();
+  // Minutes part from the timestamp
+  var minutes = "0" + date.getMinutes();
+  // Seconds part from the timestamp
+  var seconds = "0" + date.getSeconds();
+
+  // Will display time in 10:30:23 format
+  var formattedTime = years+'-'+month+'-'+day+' '+ hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+
+  return formattedTime; //date.toISOString()
+}
+
 function PostCreate(props){
   const onPost = props.onPost
   const { handleSubmit, register, errors, reset } = useForm();
@@ -40,11 +63,12 @@ function Post(props){
   if (props.image !== "" && props.image !== "null" ) {
     img = <img className="displayImg" alt="img" src={props.image} />
   }
+  let datetimetext = timeConverter(props.timestamp)
   return (
   <div className="post">
     <div className="postheader">
       <span className="postusername">{props.username}</span>
-      <span className="postdatetime">{props.timestamp}</span>
+      <span className="postdatetime">{datetimetext}</span>
       <button onClick={()=>{ props.onDelPost(props.id) }} className="BlueBtn">X</button>
     </div>
     <div className="postcontent">{props.content}</div>
@@ -55,11 +79,12 @@ function Post(props){
 }
 
 function Comment(props){
+  let datetimetext = timeConverter(props.timestamp)
   return (
     <div className="post">
       <div className="postheader">
         <span className="postusername">{props.username}</span>
-        <span className="postdatetime">{props.timestamp}</span>
+        <span className="postdatetime">{datetimetext}</span>
         <button onClick={()=>{ props.onDelComment(props.postid,props.username,props.timestamp) }} className="BlueBtn">X</button>
       </div>
       <div className="postcontent">{props.comment}</div>
