@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { useForm } from "react-hook-form";
 import FileBase64 from 'react-file-base64';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+ 
 
 function timeConverter(UNIX_timestamp){
   // let unix_timestamp = 1549312452
@@ -69,7 +72,8 @@ function Post(props){
     <div className="postheader">
       <span className="postusername">{props.username}</span>
       <span className="postdatetime">{datetimetext}</span>
-      <button onClick={()=>{ props.onDelPost(props.id) }} className="BlueBtn">X</button>
+      <button onClick={()=>{ props.onDelPost(props.id) }} className="RedBtn"><FontAwesomeIcon icon={faTrashAlt} /></button>
+      
     </div>
     <div className="postcontent">{props.content}</div>
     { img }
@@ -85,7 +89,7 @@ function Comment(props){
       <div className="postheader">
         <span className="postusername">{props.username}</span>
         <span className="postdatetime">{datetimetext}</span>
-        <button onClick={()=>{ props.onDelComment(props.postid,props.username,props.timestamp) }} className="BlueBtn">X</button>
+        <button onClick={()=>{ props.onDelComment(props.postid,props.username,props.timestamp) }} className="RedBtn"><FontAwesomeIcon icon={faTrashAlt} /></button>
       </div>
       <div className="postcontent">{props.comment}</div>
       <hr />

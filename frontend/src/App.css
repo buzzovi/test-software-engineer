@@ -56,6 +56,19 @@
   background-color: #348bc5;
   cursor: pointer;
 }
+.RedBtn{
+  padding: 5px 5px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  box-shadow: none;
+  color: gray;
+}
+.RedBtn:hover{
+  background-color: red;
+  color: white;
+  cursor: pointer;
+}
 .postlist{
   width: 400px;
   margin: auto;
