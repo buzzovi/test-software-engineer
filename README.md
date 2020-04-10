@@ -1,8 +1,3 @@
-IAM Username: kaizen_user
-
-IAM Password: LV0yU7doaTcraOK[9
-
-Login URL: https://608738265803.signin.aws.amazon.com/console
 
 # The Kaizen blog
 
@@ -107,7 +102,9 @@ Blog
   * Lamda Python functions - Read data from dynamo forward to react API Gateway
    * postlist
    * postcreate
-   * comment
+   * postdelete
+   * commentcreate
+   * commentdelete
 
 * Frontend 
   * React
@@ -115,7 +112,7 @@ Blog
 DynamoDB Blog Table item structure
 "Items": [
   {
-    "post-id": "1586341039-bz",
+    "id": "1586341039-bz",
     "content": "First Post",
     "username": "bz",
     "image": "''",
