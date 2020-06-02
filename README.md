@@ -92,6 +92,10 @@ Below is the full list of requirements. We recommend you to start by documenting
 - Cannot use Provisioned IOPS
 - Max Storage size of 10GB
 
+#
+
+# Solution:
+
 ## Technical architecture
 
 Blog
@@ -136,4 +140,6 @@ Blog
     }
     ```
 
-    Please replace the text in this section by a short paragraph detailing how you will be architecting the solution. Which services you are going to use, why you think that they're the most appropriate and how they are going to interact with each other. We're not looking for a fully detailed technical documentation here, but at least something that quickly enables us (and other developers) to understand what you've done and how.
+## AWS Demo
+
+[DEMO LINK](https://master.d1bbanu4yf71uh.amplifyapp.com/)
