@@ -1,19 +1,19 @@
 {
-    "Items": [
+  "Items": [
+    {
+      "id": "1586341039-bz",
+      "content": "First Post",
+      "username": "bz",
+      "image": "''",
+      "timestamp": 1586341039,
+      "comments": [
         {
-            "id": "1586341039-bz",
-            "content": "First Post",
-            "username": "bz",
-            "image": "''",
-            "timestamp": 1586341039,
-            "comments": [
-                {
-                    "comment": "Great!",
-                    "liked": false,
-                    "timestamp": 1586341039,
-                    "username": "Julia"
-                }
-            ]
+          "comment": "Great!",
+          "liked": false,
+          "timestamp": 1586341039,
+          "username": "Julia"
         }
-    ]
+      ]
+    }
+  ]
 }
