@@ -12,20 +12,7 @@ function timeConverter(UNIX_timestamp) {
   // multiplied by 1000 so that the argument is in milliseconds, not seconds.
   var date = new Date(unix_timestamp * 1000);
   var years = date.getFullYear();
-  var months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
+  var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   var month = months[date.getMonth()];
   var day = date.getDate();
   // Hours part from the timestamp
@@ -37,17 +24,7 @@ function timeConverter(UNIX_timestamp) {
 
   // Will display time in 10:30:23 format
   var formattedTime =
-    years +
-    "-" +
-    month +
-    "-" +
-    day +
-    " " +
-    hours +
-    ":" +
-    minutes.substr(-2) +
-    ":" +
-    seconds.substr(-2);
+    years + "-" + month + "-" + day + " " + hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
 
   return formattedTime; //date.toISOString()
 }
@@ -58,13 +35,7 @@ function PostCreate(props) {
   const onFileUpload = props.onFileUpload;
   let img = "";
   if (props.imgSrc.files.length > 0) {
-    img = (
-      <img
-        className="displayImg"
-        alt="img"
-        src={props.imgSrc.files[0].base64}
-      />
-    );
+    img = <img className="displayImg" alt="img" src={props.imgSrc.files[0].base64} />;
   }
   return (
     <div className="App-body">
@@ -75,11 +46,7 @@ function PostCreate(props) {
       >
         <h1>The Keisen Blog</h1>
         <div className="Post_form">
-          <input
-            name="username"
-            ref={register({ required: "Required" })}
-            placeholder="User name"
-          />
+          <input name="username" ref={register({ required: "Required" })} placeholder="User name" />
           {errors.username && "User name is required"}
           <textarea
             name="content"
@@ -89,11 +56,7 @@ function PostCreate(props) {
             placeholder="Post content"
           />
           {errors.content && "Post content is required"}
-          <FileBase64
-            className="uploadImg"
-            multiple={false}
-            onDone={onFileUpload}
-          />
+          <FileBase64 className="uploadImg" multiple={false} onDone={onFileUpload} />
           {img}
         </div>
         <button type="submit" className="BlueBtn">
@@ -154,12 +117,7 @@ function Comment(props) {
 }
 
 function CommenList(props) {
-  let {
-    handleSubmit: handleSubmit2,
-    register: register2,
-    errors: errors2,
-    reset: reset2,
-  } = useForm();
+  let { handleSubmit: handleSubmit2, register: register2, errors: errors2, reset: reset2 } = useForm();
   const onComment = props.onComment;
   const onDelComment = props.onDelComment;
   return (
@@ -180,23 +138,10 @@ function CommenList(props) {
         })}
       >
         <div className="Comment_form">
-          <input
-            type="hidden"
-            name="postid"
-            value={props.postid}
-            ref={register2({})}
-          />
-          <input
-            placeholder="User name"
-            name="username"
-            ref={register2({ required: "Required" })}
-          />
+          <input type="hidden" name="postid" value={props.postid} ref={register2({})} />
+          <input placeholder="User name" name="username" ref={register2({ required: "Required" })} />
           {errors2.username && "User name is required"}
-          <input
-            placeholder="Comment"
-            name="comment"
-            ref={register2({ required: "Required" })}
-          />
+          <input placeholder="Comment" name="comment" ref={register2({ required: "Required" })} />
           {errors2.comment && "comment is required"}
           <button className="BlueBtn">Comment!</button>
         </div>
@@ -216,12 +161,7 @@ function PostList(props) {
         return (
           <div key={post.id}>
             <Post {...post} onDelPost={props.onDelPost} />
-            <CommenList
-              comments={post.comments}
-              postid={post.id}
-              onComment={onComment}
-              onDelComment={onDelComment}
-            />
+            <CommenList comments={post.comments} postid={post.id} onComment={onComment} onDelComment={onDelComment} />
           </div>
         );
       })}
@@ -240,13 +180,10 @@ function App() {
     // Create Post
     if (img.files.length > 0) values.image = img.files[0].base64;
 
-    fetch(
-      "https://bmpi7pfcqk.execute-api.eu-west-1.amazonaws.com/Prod/postcreate",
-      {
-        method: "POST",
-        body: JSON.stringify(values),
-      }
-    )
+    fetch("https://bmpi7pfcqk.execute-api.eu-west-1.amazonaws.com/Prod/postcreate", {
+      method: "POST",
+      body: JSON.stringify(values),
+    })
       .then(async (response) => {
         const data = await response.json();
         console.log(data);
@@ -270,13 +207,10 @@ function App() {
   const onComment = (values, reset2) => {
     // Create Comment
     console.log(values);
-    fetch(
-      "https://bmpi7pfcqk.execute-api.eu-west-1.amazonaws.com/Prod/commentcreate",
-      {
-        method: "POST",
-        body: JSON.stringify(values),
-      }
-    )
+    fetch("https://bmpi7pfcqk.execute-api.eu-west-1.amazonaws.com/Prod/commentcreate", {
+      method: "POST",
+      body: JSON.stringify(values),
+    })
       .then(async (response) => {
         const data = await response.json();
         console.log(data);
@@ -288,9 +222,7 @@ function App() {
         }
 
         let newallPost = { ...allPost };
-        var foundIndex = newallPost["Items"].findIndex(
-          (post) => post.id === data.id
-        );
+        var foundIndex = newallPost["Items"].findIndex((post) => post.id === data.id);
         newallPost["Items"][foundIndex] = data;
         setAllPosts(newallPost);
         reset2();
@@ -305,13 +237,10 @@ function App() {
     // Create Comment
     let values = { id: id, username: username, timestamp: timestamp };
     console.log(values);
-    fetch(
-      "https://bmpi7pfcqk.execute-api.eu-west-1.amazonaws.com/Prod/commentdelete",
-      {
-        method: "POST",
-        body: JSON.stringify(values),
-      }
-    )
+    fetch("https://bmpi7pfcqk.execute-api.eu-west-1.amazonaws.com/Prod/commentdelete", {
+      method: "POST",
+      body: JSON.stringify(values),
+    })
       .then(async (response) => {
         const data = await response.json();
         console.log(data);
@@ -323,9 +252,7 @@ function App() {
         }
 
         let newallPost = { ...allPost };
-        var foundIndex = newallPost["Items"].findIndex(
-          (post) => post.id === data.id
-        );
+        var foundIndex = newallPost["Items"].findIndex((post) => post.id === data.id);
         newallPost["Items"][foundIndex] = data;
         setAllPosts(newallPost);
       })
@@ -336,13 +263,10 @@ function App() {
   };
   const onDelPost = (id) => {
     // Delete Post
-    fetch(
-      "https://bmpi7pfcqk.execute-api.eu-west-1.amazonaws.com/Prod/postdelete",
-      {
-        method: "POST",
-        body: JSON.stringify({ id: id }),
-      }
-    )
+    fetch("https://bmpi7pfcqk.execute-api.eu-west-1.amazonaws.com/Prod/postdelete", {
+      method: "POST",
+      body: JSON.stringify({ id: id }),
+    })
       .then(async (response) => {
         const data = await response.json();
         console.log(data);
@@ -366,9 +290,7 @@ function App() {
 
   useEffect(() => {
     // GetPostsList
-    fetch(
-      "https://bmpi7pfcqk.execute-api.eu-west-1.amazonaws.com/Prod/postlist"
-    )
+    fetch("https://bmpi7pfcqk.execute-api.eu-west-1.amazonaws.com/Prod/postlist")
       .then((res) => res.json())
       .then(
         (result) => {
@@ -383,12 +305,7 @@ function App() {
   return (
     <div className="App">
       <PostCreate onPost={onPost} onFileUpload={onFileUpload} imgSrc={img} />
-      <PostList
-        posts={allPost}
-        onDelPost={onDelPost}
-        onComment={onComment}
-        onDelComment={onDelComment}
-      />
+      <PostList posts={allPost} onDelPost={onDelPost} onComment={onComment} onDelComment={onDelComment} />
     </div>
   );
 }
